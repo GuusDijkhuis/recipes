@@ -1,0 +1,123 @@
+fieldset {
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 2rem 0;
+}
+.container {
+	padding: 1.5rem;
+	display: flex;
+	justify-content: center;
+}
+.formTitle {
+	font-size: 3rem;
+	font-weight: 500;
+}
+.form {
+	width: clamp(400px, 90%, 1080px);
+	display: flex;
+	flex-direction: column;
+}
+.formField {
+	margin-top: 0.75rem;
+	display: flex;
+	width: 100%;
+}
+.formFieldLabel {
+	width: 25%;
+	font-weight: 300;
+	font-size: 1.25rem;
+}
+.formFieldInput {
+	width: 75%;
+}
+.formFieldInputRow {
+	margin-right: 10px;
+}
+.formFieldInputRow + button {
+	width: 25%;
+}
+.formDropDown {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	align-items: stretch;
+}
+.formDropDownInput {
+	width: 25%;
+}
+.formDropDownInput:nth-child(2) {
+	width: 25%;
+}
+.formDropDownSelect {
+	width: 25%;
+}
+.formDropDownSelect + button {
+	width: 25%;
+}
+.formFieldContent {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+}
+.formFieldList {
+	margin-bottom: .75rem;
+}
+.formFieldListItem {
+	padding: .5rem;
+	line-height: 1.5rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background-color: rgba(0, 149, 195, 0.3);
+}
+.formFieldListItem:first-child {
+	background-color:rgba(0, 0, 0, 0.2);
+}
+.formFieldListItem:first-child > span:last-child {
+	flex-grow: 1;
+}
+.formFieldListItem:nth-child(2n+3) {
+	background-color:rgba(0, 149, 195, 0.4);
+}
+
+.formFieldListItem > span {
+	flex: 0 0 25%;
+}
+.formFieldListItem > span + button {
+	width: 25%;
+}
+
+.button {
+	appearance: inherit;
+	background-color: transparent;
+	border: inherit;
+	font-weight: 500;
+	transition: all .35s ease;
+	padding: .25rem .5rem;
+	background-color: none;
+}
+.removeButton {
+	color: #DC0404;
+}
+.addButton {
+	color: #0095C3;
+	border-bottom: #0095C3 solid 3px;
+}
+.button:hover {
+	background-color:rgba(0, 0, 0, 0.2);
+}
+
+
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+	border-radius: 0;
+	border: black solid 1px;
+	padding: .5rem 1rem;
+}
+textarea {
+	resize: none;
+	height: 7rem;
+}

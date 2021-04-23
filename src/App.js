@@ -1,8 +1,13 @@
+import React from 'react';
+
+import AddRecipe from './components/CMS/AddRecipe';
+
+import './globals.css';
 
 function App() {
 	return (
 		<div>
-			<h1>Recipes</h1>
+			<AddRecipe />
 		</div>
 	);
 }
