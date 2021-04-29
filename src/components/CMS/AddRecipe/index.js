@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createRecipe } from '../../../actions/recipes'
 
-import Button from '../../Elements/Button';
+import Button from '../../elements/Button';
 
 import classes from './index.module.css';
 import { v4 as uuidv4 } from 'uuid';
