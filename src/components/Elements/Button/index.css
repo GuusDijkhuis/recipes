@@ -1,0 +1,29 @@
+button {
+	font-weight: 500;
+	transition: .35s ease all;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.naked {
+	background-color: transparent;
+}
+.submit {
+	border-radius: 20px;
+	background-color: #0095C3;
+	color: black;
+	font-weight: 500;
+	font-size: 1.25rem;
+	padding: .5rem 2.25rem;
+}
+.danger {
+	color: #DC0404;
+	padding: .5rem 2.25rem;
+}
+.secondary {
+	color: #0095C3;
+	border-bottom: #0095C3 solid 3px;
+}
+button:hover {
+	transform: translateY(-2px);
+}

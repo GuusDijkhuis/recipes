@@ -1,8 +1,13 @@
+import React from 'react';
+
+import Cms from './components/CMS';
+
+import './globals.css';
 
 function App() {
 	return (
 		<div>
-			<h1>Recipes</h1>
+			<Cms />
 		</div>
 	);
 }

@@ -1,0 +1,29 @@
+.nav {
+	background-color: #0095C3;
+	height: 100vh;
+	width: 20rem;
+	padding-top: 10rem;
+}
+.nav > h1 {
+	padding: 0 1.5rem;
+	margin-bottom: 1.5rem;
+}
+.nav ul {
+	display: flex;
+	flex-direction: column;
+	height: max-content;
+	background-color: white;
+	border: black 2px solid;
+}
+.nav li {
+	padding: 1rem 1.5rem;
+	transition: all .35s ease;
+}
+.nav a {
+	font-size: 1.25rem;
+	font-weight: 300;
+	transition: all .35s ease;
+}
+.nav a:hover > li {
+	transform: translateX(2px);
+}
