@@ -6,6 +6,7 @@ fieldset {
 .container {
 	padding: 1.5rem;
 	display: flex;
+	width: 100%;
 	justify-content: center;
 }
 .formTitle {
@@ -87,7 +88,7 @@ fieldset {
 	width: 25%;
 }
 
-.button {
+/* .button {
 	appearance: inherit;
 	background-color: transparent;
 	border: inherit;
@@ -105,9 +106,7 @@ fieldset {
 }
 .button:hover {
 	background-color:rgba(0, 0, 0, 0.2);
-}
-
-
+} */
 
 input[type="text"],
 input[type="number"],

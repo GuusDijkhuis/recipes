@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createRecipe } from '../../../actions/recipes'
+
+import Button from '../../Elements/Button';
+
 import classes from './index.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddRecipe = () => {
+	const dispatch = useDispatch();
 	const [recipeData, setRecipeData] = useState({
 		title: '',
 		introduction: '',
@@ -12,6 +18,12 @@ const AddRecipe = () => {
 		},
 		personCount: 0,
 		ingredients: [],
+		currIngredient: {
+			id: '',
+			name: '',
+			quantity: '',
+			unit: ''
+		},
 		tools: [],
 		currTool: {
 			id: '',
@@ -26,12 +38,6 @@ const AddRecipe = () => {
 				value: '',
 				unit: ''
 			}
-		},
-		currIngredient: {
-			id: '',
-			name: '',
-			quantity: '',
-			unit: ''
 		}
 	})
 
@@ -96,10 +102,50 @@ const AddRecipe = () => {
 
 
 	const handleSubmit = (e) => {
+		let data = { ...recipeData };
+		delete data.currIngredient;
+		delete data.currTool;
+		delete data.currStep;
+
 		e.preventDefault();
+		dispatch(createRecipe(data));
+
+		clear();
 	}
 
-
+	const clear = () => {
+		setRecipeData({
+			title: '',
+			introduction: '',
+			cookingtime: {
+				value: 0,
+				unit: ''
+			},
+			personCount: 0,
+			ingredients: [],
+			currIngredient: {
+				id: '',
+				name: '',
+				quantity: '',
+				unit: ''
+			},
+			tools: [],
+			currTool: {
+				id: '',
+				name: ''
+			},
+			steps: [],
+			currStep: {
+				id: '',
+				name: '',
+				description: '',
+				expectedtime: {
+					value: '',
+					unit: ''
+				}
+			}
+		})
+	}
 	return (
 		<div className={classes.container}>
 			<form className={classes.form} onSubmit={handleSubmit}>
@@ -168,20 +214,19 @@ const AddRecipe = () => {
 									<span>Quantity</span>
 									<span>Unit</span>
 								</li>
-								{ 
+								{
 									recipeData.ingredients.length > 0 ? (
 										recipeData.ingredients.map((res) => (
 											<li className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<span>{res.quantity}</span>
 												<span>{res.unit}</span>
-												<button 
-													className={`${classes.button} ${classes.removeButton}`} 
-													onClick={(e) => removeIngredient(res.id)} 
-													type="button"
-												>
-													Remove
-												</button>
+												<Button 
+													label='Remove'
+													type='button'
+													classes='danger'
+													eventClick={(e) => removeIngredient(res.id)}
+												/>
 											</li>
 										))
 									) : (
@@ -223,13 +268,12 @@ const AddRecipe = () => {
 									<option value="liters">Liters</option>
 									<option value="ml">Mililiters</option>
 								</select>
-								<button 
-									type="button" 
-									className={`${classes.button} ${classes.addButton}`} 
-									onClick={addIngredient}
-								>
-									Add
-								</button>
+								<Button 
+									label='Add'
+									type='button'
+									classes='secondary'
+									eventClick={addIngredient}
+								/>
 							</div>
 						</div>
 					</div>
@@ -247,13 +291,12 @@ const AddRecipe = () => {
 										recipeData.tools.map((res) => (
 											<li className={classes.formFieldListItem}>
 												<span>{res.name}</span>
-												<button 
-													className={`${classes.button} ${classes.removeButton}`} 
-													onClick={(e) => removeTool(res.id)} 
-													type="button"
-												>
-													Remove
-												</button>
+												<Button 
+													label='Remove'
+													type='button'
+													classes='danger'
+													eventClick={(e) => removeTool(res.id)}
+												/>
 											</li>
 										)
 									)) : (
@@ -272,13 +315,12 @@ const AddRecipe = () => {
 									value={recipeData.currTool.name}
 									placeholder="tool"
 								/>
-								<button 
-									type="button" 
-									className={`${classes.button} ${classes.addButton}`} 
-									onClick={addTool}
-								>
-									Add
-								</button>
+								<Button 
+									label='Add'
+									type='button'
+									classes='secondary'
+									eventClick={addTool}
+								/>
 							</div>
 						</div>
 					</div>
@@ -300,13 +342,12 @@ const AddRecipe = () => {
 												<span>{i}</span>
 												<span>{res.name}</span>
 												<span>{res.expectedtime.value} {res.expectedtime.unit}</span>
-												<button 
-													className={`${classes.button} ${classes.removeButton}`} 
-													onClick={(e) => removeStep(res.id)} 
-													type="button"
-												>
-													Remove
-												</button>
+												<Button 
+													label='Remove'
+													type='button'
+													classes='danger'
+													eventClick={(e) => removeStep(res.id)}
+												/>
 											</li>
 										)
 									)) : (
@@ -367,18 +408,21 @@ const AddRecipe = () => {
 									<option value="hour">hour</option>
 									<option value="minutes">minutes</option>
 								</select>
-								<button 
-									type="button" 
-									className={`${classes.button} ${classes.addButton}`} 
-									onClick={addStep}
-								>
-									Add
-								</button>
+								<Button 
+									label='Add'
+									type='button'
+									classes='secondary'
+									eventClick={addStep}
+								/>
 							</div>
 						</div>
 					</div>
 				</fieldset>
-				<input type="submit" value="submit" />
+				<Button 
+					label='Submit'
+					type='submit'
+					classes='submit'
+				/>
 			</form>
 		</div>
 	);

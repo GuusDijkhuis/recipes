@@ -1,13 +1,13 @@
 import React from 'react';
 
-import AddRecipe from './components/CMS/AddRecipe';
+import Cms from './components/CMS';
 
 import './globals.css';
 
 function App() {
 	return (
 		<div>
-			<AddRecipe />
+			<Cms />
 		</div>
 	);
 }
