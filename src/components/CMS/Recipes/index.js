@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '../../Elements/Button';
+
 import classes from './index.module.css';
 
 const Recipes = () => {
@@ -16,23 +18,21 @@ const Recipes = () => {
 					<span>komkommer</span>
 					<span>2</span>
 					<span>stuks</span>
-					<button 
-						className={`${classes.button} ${classes.removeButton}`} 
+					<Button 
+						label="Remove"
+						className="remove" 
 						type="button"
-					>
-						Remove
-					</button>
+					/>
 				</li>
 				<li className={classes.formFieldListItem}>
 					<span>tomaten</span>
 					<span>6</span>
 					<span>stuks</span>
-					<button 
-						className={`${classes.button} ${classes.removeButton}`} 
+					<Button 
+						label="Remove"
+						className="remove" 
 						type="button"
-					>
-						Remove
-					</button>
+					/>
 				</li>
 			</ul>
 		</div>

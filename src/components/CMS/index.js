@@ -1,10 +1,7 @@
 import React from 'react';
 
 import Nav from './Nav';
-// import Recipes from './Recipes';
 import AddRecipe from './AddRecipe';
-import Button from '../Elements/Button';
-
 
 import '../../globals.css';
 import classes from './index.module.css';
