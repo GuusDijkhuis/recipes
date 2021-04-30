@@ -3,7 +3,7 @@ import React from 'react';
 import Nav from './Nav';
 import AddRecipe from './AddRecipe';
 
-import '../../globals.css';
+import '../../../globals.css';
 import classes from './index.module.css';
 
 const Cms = () => {
