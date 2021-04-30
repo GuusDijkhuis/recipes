@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Nav from './components/modules/Nav';
 import Cms from './components/pages/CMS';
 import Home from './components/pages/Home';
 import Recipes from './components/pages/Recipes';

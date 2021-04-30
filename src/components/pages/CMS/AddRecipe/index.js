@@ -270,7 +270,7 @@ const AddRecipe = () => {
 								<Button 
 									label='Add'
 									type='button'
-									classes='secondary'
+									classes='secondary secondary-underline'
 									eventClick={addIngredient}
 								/>
 							</div>
@@ -317,7 +317,7 @@ const AddRecipe = () => {
 								<Button 
 									label='Add'
 									type='button'
-									classes='secondary'
+									classes='secondary secondary-underline'
 									eventClick={addTool}
 								/>
 							</div>
@@ -410,7 +410,7 @@ const AddRecipe = () => {
 								<Button 
 									label='Add'
 									type='button'
-									classes='secondary'
+									classes='secondary secondary-underline'
 									eventClick={addStep}
 								/>
 							</div>
