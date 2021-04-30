@@ -10,6 +10,7 @@ const AddRecipe = () => {
 	const dispatch = useDispatch();
 	const [recipeData, setRecipeData] = useState({
 		title: '',
+		image: '',
 		introduction: '',
 		cookingtime: {
 			value: 0,
@@ -115,6 +116,7 @@ const AddRecipe = () => {
 	const clear = () => {
 		setRecipeData({
 			title: '',
+			image: '',
 			introduction: '',
 			cookingtime: {
 				value: 0,
@@ -147,7 +149,7 @@ const AddRecipe = () => {
 	}
 	return (
 		<div className={classes.container}>
-			<form className={classes.form} onSubmit={handleSubmit}>
+			<form className={classes.form} onSubmit={handleSubmit} encType="multipart/form-data">
 				<h1 className={classes.formTitle}>Recipe Form</h1>
 				<fieldset>
 					<div className={classes.formField}>
