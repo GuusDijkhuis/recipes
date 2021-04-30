@@ -1,10 +1,14 @@
 import React from 'react';
+import Nav from '../../modules/Nav';
 
 import classes from './index.module.css';
 
 const Recipes = () => {
 	return (
-		<h1>Recepten</h1>
+		<div>
+			<Nav />
+			<h1>Recepten</h1>
+		</div>
 	);
 }
 

@@ -1,13 +1,12 @@
 import React from 'react';
 
 import Nav from './components/modules/Nav';
-import Cms from './components/CMS';
+import Cms from './components/pages/CMS';
 import Home from './components/pages/Home';
 import Recipes from './components/pages/Recipes';
 import About from './components/pages/About';
 
 import {
-	BrowserRouter as Router,
 	Switch,
 	Route
 } from "react-router-dom";
@@ -15,7 +14,6 @@ import {
 export default function App() {
 	return (
 		<div>
-			<Nav />
 			<Switch>
 				<Route exact path="/recipes" component={ ()=> <Recipes/> } />
 				<Route exact path="/about-us"  component={ ()=> <About /> } />
