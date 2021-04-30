@@ -9,7 +9,6 @@ export const getAllRecipes = () => async (dispatch) => {
 		console.log(error);
 	}
 }
-
 export const createRecipe = (recipe) => async (dispatch) => {
 	try {
 		const { data } = await api.createRecipe(recipe);

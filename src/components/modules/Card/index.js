@@ -11,9 +11,11 @@ const Card = (props) => {
 				{
 					props.image ? (
 						<img src={props.image} alt={props.label} />
-					) : <div className={classes.noImage}>
+					) : (
+					<div className={classes.noImage}>
 						<span>no image</span>
-					</div>
+					</div> 
+					)
 				}
 				<header>
 					<h2>{props.label}</h2>
