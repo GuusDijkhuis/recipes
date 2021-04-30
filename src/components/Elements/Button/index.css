@@ -22,6 +22,8 @@ button {
 }
 .secondary {
 	color: #0095C3;
+}
+.secondary-underline {
 	border-bottom: #0095C3 solid 3px;
 }
 button:hover {

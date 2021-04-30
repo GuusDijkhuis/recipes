@@ -1,0 +1,8 @@
+.content {
+	padding: 3rem 5.25rem;
+}
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+}

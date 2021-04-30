@@ -1,0 +1,38 @@
+.card {
+	width: 300px;
+	height: 400px;
+	box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+}
+.card section {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.card header {
+	height: 50%;
+	padding: 1.5rem;
+	flex-basis: 60%;
+	background-color: white;
+}
+.card button {
+	margin-left: auto; 
+	display: block;
+}
+.card ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-top: 0.5rem;
+}
+.tag {
+	color: #727272;
+}
+.noImage {
+	background-color: #D4D4D4;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
