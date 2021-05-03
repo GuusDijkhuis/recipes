@@ -22,6 +22,8 @@ const Recipes = () => {
 				{ 
 					recipes.length ? recipes.map((recipe) => (
 						<Card 
+							id={recipe._id}
+							image={recipe.picture ? recipe.picture : ''}
 							label={recipe.title}
 							tags={[
 								`${recipe.personCount} personen`,

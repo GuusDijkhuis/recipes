@@ -10,6 +10,7 @@ const AddRecipe = () => {
 	const dispatch = useDispatch();
 	const [recipeData, setRecipeData] = useState({
 		title: '',
+		picture: '',
 		introduction: '',
 		cookingtime: {
 			value: 0,
@@ -101,13 +102,18 @@ const AddRecipe = () => {
 
 
 	const handleSubmit = (e) => {
-		let data = { ...recipeData };
-		delete data.currIngredient;
-		delete data.currTool;
-		delete data.currStep;
-
 		e.preventDefault();
-		dispatch(createRecipe(data));
+
+		const formData = new FormData();
+		formData.append('title', recipeData.title);
+		formData.append('picture', recipeData.picture);
+		formData.append('introduction', recipeData.introduction);
+		formData.append('cookingtime', JSON.stringify({ ...recipeData.cookingtime }));
+		formData.append('personCount', recipeData.personCount);
+		formData.append('ingredients', JSON.stringify([ ...recipeData.ingredients ]));
+		formData.append('tools', JSON.stringify([ ...recipeData.tools ]));
+		formData.append('steps', JSON.stringify([ ...recipeData.steps ]));
+		dispatch(createRecipe(formData));
 
 		clear();
 	}
@@ -115,6 +121,7 @@ const AddRecipe = () => {
 	const clear = () => {
 		setRecipeData({
 			title: '',
+			picture: '',
 			introduction: '',
 			cookingtime: {
 				value: 0,
@@ -147,7 +154,7 @@ const AddRecipe = () => {
 	}
 	return (
 		<div className={classes.container}>
-			<form className={classes.form} onSubmit={handleSubmit}>
+			<form className={classes.form} onSubmit={handleSubmit} encType="multipart/form-data">
 				<h1 className={classes.formTitle}>Recipe Form</h1>
 				<fieldset>
 					<div className={classes.formField}>
@@ -158,6 +165,16 @@ const AddRecipe = () => {
 							name="title" 
 							value={recipeData.title} 
 							onChange={(e) => setRecipeData({ ...recipeData, title: e.target.value })}
+						/>
+					</div>
+					<div className={classes.formField}>
+						<label className={classes.formFieldLabel}>Picture</label>
+						<input 
+							className={classes.formFieldInput}
+							type="file" 
+							accept=".png, .jpg, .jpeg"
+							name="picture"
+							onChange={(e) => setRecipeData({...recipeData, picture: e.target.files[0]})}
 						/>
 					</div>
 					<div className={classes.formField}>
@@ -246,7 +263,7 @@ const AddRecipe = () => {
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, name: e.target.value }})}
 									value={recipeData.currIngredient.name}
 									placeholder="ingredient"
-									/>
+								/>
 								<input 
 									className={classes.formDropDownInput}
 									type="text" 
@@ -254,18 +271,23 @@ const AddRecipe = () => {
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, quantity: e.target.value }})}
 									value={recipeData.currIngredient.quantity}
 									placeholder="quantity"
-									/>
+								/>
 								<select 
 									className={classes.formDropDownSelect} 
 									name="ingredientUnit"
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, unit: e.target.value }})}
 									placeholder="tablespoon"
 								>
-									<option value="tbsp">Tablespoon</option>
-									<option value="tsp">Teaspoon</option>
-									<option value="grams">Grams</option>
-									<option value="liters">Liters</option>
-									<option value="ml">Mililiters</option>
+									<option default value="pieces">Piece(s)</option>
+									<option value="tablespoon">Tbsp</option>
+									<option value="teaspoon">Tsp</option>
+									<option value="gram">Grams</option>
+									<option value="pound">Pounds</option>
+									<option value="kilo">Kilos</option>
+									<option value="liter">L</option>
+									<option value="mililiter">Ml</option>
+									<option value="cloves">Cloves</option>
+									<option value="leaves">Leaves</option>
 								</select>
 								<Button 
 									label='Add'

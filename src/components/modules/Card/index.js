@@ -10,7 +10,7 @@ const Card = (props) => {
 			<section>
 				{
 					props.image ? (
-						<img src={props.image} alt={props.label} />
+						<img src={props.img} alt={props.label} />
 					) : (
 					<div className={classes.noImage}>
 						<span>no image</span>
