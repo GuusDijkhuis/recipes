@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Button from '../../elements/Button';
 
 import classes from './index.module.css';
