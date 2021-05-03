@@ -1,4 +1,6 @@
 .cms {
 	width: 100%;
 	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
 }
