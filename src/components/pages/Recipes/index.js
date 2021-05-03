@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import Nav from '../../modules/Nav';
 import Card from '../../modules/Card';
 import classes from './index.module.css';
@@ -22,8 +23,9 @@ const Recipes = () => {
 				{ 
 					recipes.length ? recipes.map((recipe) => (
 						<Card 
+							key={uuidv4()}
 							id={recipe._id}
-							image={recipe.picture ? recipe.picture : ''}
+							imageUrl={recipe.request.url ? recipe.request.url : ''}
 							label={recipe.title}
 							tags={[
 								`${recipe.personCount} personen`,

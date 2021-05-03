@@ -1,8 +1,7 @@
 import React from 'react';
 
 import '../../../globals.css';
-
-import './index.css';
+import './index.css'
 
 const Button = (props) => {
 
