@@ -12,7 +12,6 @@
 	flex-direction: column;
 	height: max-content;
 	background-color: white;
-	border: black 2px solid;
 }
 .nav li {
 	padding: 1rem 1.5rem;
@@ -21,8 +20,9 @@
 .nav a {
 	font-size: 1.25rem;
 	font-weight: 300;
-	transition: all .35s ease;
+	transition: transform .35s ease;
 }
 .nav a:hover > li {
 	transform: translateX(2px);
+	border-right: #0095C3 2px solid;
 }
