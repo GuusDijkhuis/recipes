@@ -1,13 +1,13 @@
 .container {
+	margin-top: 5rem;
 	padding: 1.5rem;
-	display: flex;
 	width: 100%;
 	justify-content: center;
 }
-.formFieldList {
-	margin-bottom: .75rem;
+.list {
+	width: 100%;
 }
-.formFieldListItem {
+.list li {
 	padding: .5rem;
 	line-height: 1.5rem;
 	width: 100%;
@@ -15,19 +15,16 @@
 	align-items: center;
 	background-color: rgba(0, 149, 195, 0.3);
 }
-.formFieldListItem:first-child {
+.list li span {
+	width: 20%;
+}
+.list li:first-child {
 	background-color:rgba(0, 0, 0, 0.2);
 }
-.formFieldListItem:first-child > span:last-child {
-	flex-grow: 1;
-}
-.formFieldListItem:nth-child(2n+3) {
+.list li:nth-child(2n+3) {
 	background-color:rgba(0, 149, 195, 0.4);
 }
-
-.formFieldListItem > span {
-	flex: 0 0 25%;
-}
-.formFieldListItem > span + button {
-	width: 25%;
+.buttons {
+	display: flex;
+	justify-content: space-between;
 }

@@ -4,7 +4,6 @@ import '../../../globals.css';
 import './index.css'
 
 const Button = (props) => {
-
 	return (
 		<button 
 			type={props.type ? props.type : 'submit'} 

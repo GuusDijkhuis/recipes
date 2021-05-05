@@ -9,14 +9,14 @@ const Nav = () => {
 		<nav className={classes.nav}>
 			<h1>CMS</h1>
 			<ul>
-				<Link to="/cms/add-recipe">
-					<li>
-						Add recipe
-					</li>
-				</Link>
 				<Link to="/cms/recipes">
 					<li>
 						Recipes
+					</li>
+				</Link>
+				<Link to="/cms/add-recipe">
+					<li>
+						Add recipe
 					</li>
 				</Link>
 			</ul>

@@ -1,10 +1,9 @@
 .cms {
 	width: 100%;
-	display: flex;
-	justify-content: stretch;
-	align-items: stretch;
 	min-height: 100vh;
 }
 .container { 
 	width: 100%;
+	display: flex;
+	justify-content: center;
 }
