@@ -7,6 +7,7 @@ button {
 }
 .naked {
 	background-color: transparent;
+	padding: .5rem 1.25rem;
 }
 .submit {
 	border-radius: 20px;
@@ -18,7 +19,6 @@ button {
 }
 .danger {
 	color: #DC0404;
-	padding: .5rem 2.25rem;
 }
 .secondary {
 	color: #0095C3;
@@ -28,4 +28,5 @@ button {
 }
 button:hover {
 	transform: translateY(-2px);
+	text-decoration: solid black 2px;
 }
