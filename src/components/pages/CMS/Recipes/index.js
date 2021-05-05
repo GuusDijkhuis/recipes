@@ -16,47 +16,50 @@ const Recipes = () => {
 	}, [dispatch])
 
 	const recipes = useSelector((state) => state.recipes);
+	console.log(2, recipes);
 	return (
-		<div className={classes.container}>
-			<h1>Recipes</h1>
-			<ul className={classes.list}>
-				<li key={uuidv4()} className={classes.listItem}>
-					<span>Id</span>
-					<span>Name</span>
-					<span>Time</span>
-				</li>
-				{
-					recipes.map((recipe, i) => (
-						<li key={uuidv4()}>
-							<span>{i}</span>
-							<span>{recipe.title}</span>
-							<span>{`${recipe.cookingtime.value} ${recipe.cookingtime.unit}`}</span>
-							<div className={classes.buttons}>
-								<Button
-									link={`/cms/recipes/${recipe._id}`}
-									type="button"
-									classes="secondary naked"
-									eventClick={(e) => console.log('details')}
-									label="details"
-								/>
-								<Button
-									type="button"
-									classes="secondary naked"
-									eventClick={(e) => console.log('edit')}
-									label="edit"
-								/>
-								<Button
-									type="button"
-									classes="danger naked"
-									eventClick={(e) => console.log('remove')}
-									label="remove"
-								/>
-							</div>
-						</li>
-					))
-				}
-			</ul>
-		</div>
+		recipes.length !== 0 ? (
+			<div className={classes.container}>
+				<h1>Recipes</h1>
+				<ul className={classes.list}>
+					<li key={uuidv4()} className={classes.listItem}>
+						<span>Id</span>
+						<span>Name</span>
+						<span>Time</span>
+					</li>
+					{
+						recipes.map((recipe, i) => (
+							<li key={uuidv4()}>
+								<span>{i}</span>
+								<span>{recipe.title}</span>
+								<span>{recipe.cookingtime ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
+								<div className={classes.buttons}>
+									<Button
+										link={`/cms/recipes/${recipe._id}`}
+										type="button"
+										classes="secondary naked"
+										eventClick={(e) => console.log('details')}
+										label="details"
+									/>
+									<Button
+										type="button"
+										classes="secondary naked"
+										eventClick={(e) => console.log('edit')}
+										label="edit"
+									/>
+									<Button
+										type="button"
+										classes="danger naked"
+										eventClick={(e) => console.log('remove')}
+										label="remove"
+									/>
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		) : ''
 	);
 }
 
