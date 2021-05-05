@@ -27,13 +27,13 @@ const Recipes = () => {
 				</li>
 				{
 					recipes.map((recipe, i) => (
-
 						<li key={uuidv4()}>
 							<span>{i}</span>
 							<span>{recipe.title}</span>
 							<span>{`${recipe.cookingtime.value} ${recipe.cookingtime.unit}`}</span>
 							<div className={classes.buttons}>
 								<Button
+									link={`/cms/recipes/${recipe._id}`}
 									type="button"
 									classes="secondary naked"
 									eventClick={(e) => console.log('details')}
