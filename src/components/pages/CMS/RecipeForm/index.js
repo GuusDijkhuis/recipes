@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createRecipe } from '../../../../actions/recipes';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { createRecipe, getRecipe } from '../../../../actions/recipes';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../../../elements/Button';
 
 import classes from './index.module.css';
 
-const AddRecipe = () => {
+const RecipeForm = () => {
+	const { id } = useParams();
 	const dispatch = useDispatch();
+
 	const [recipeData, setRecipeData] = useState({
 		title: '',
 		picture: '',
@@ -40,6 +43,11 @@ const AddRecipe = () => {
 			}
 		}
 	})
+	useEffect(() => {
+		if(id) {
+			getRecipe(id);
+		}
+	}, [id])
 
 	const addIngredient = () => {
 		setRecipeData({
@@ -99,7 +107,6 @@ const AddRecipe = () => {
 			steps: updatedStepList
 		})
 	}
-
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -225,7 +232,7 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Ingredients</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Ingredient</span>
 									<span>Quantity</span>
 									<span>Unit</span>
@@ -233,7 +240,7 @@ const AddRecipe = () => {
 								{
 									recipeData.ingredients.length > 0 ? (
 										recipeData.ingredients.map((res) => (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<span>{res.quantity}</span>
 												<span>{res.unit}</span>
@@ -246,7 +253,7 @@ const AddRecipe = () => {
 											</li>
 										))
 									) : (
-										<li className={classes.formFieldListItem}>
+										<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 											<span>-</span>
 											<span>-</span>
@@ -304,13 +311,13 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Tools</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Tool</span>
 								</li>
 								{
 									recipeData.tools.length > 0 ? (
 										recipeData.tools.map((res) => (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<Button 
 													label='Remove'
@@ -321,7 +328,7 @@ const AddRecipe = () => {
 											</li>
 										)
 									)) : (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 										</li>
 									)
@@ -351,7 +358,7 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Steps</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Nr.</span>
 									<span>Name</span>
 									<span>Expected Time</span>
@@ -359,8 +366,8 @@ const AddRecipe = () => {
 								{
 									recipeData.steps.length > 0 ? (
 										recipeData.steps.map((res, i) => (
-											<li className={classes.formFieldListItem}>
-												<span>{i}</span>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
+												<span>{i+1}</span>
 												<span>{res.name}</span>
 												<span>{res.expectedtime.value} {res.expectedtime.unit}</span>
 												<Button 
@@ -372,7 +379,7 @@ const AddRecipe = () => {
 											</li>
 										)
 									)) : (
-											<li className={classes.formFieldListItem}>
+										<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 											<span>-</span>
 											<span>-</span>
@@ -449,4 +456,4 @@ const AddRecipe = () => {
 	);
 }
 
-export default AddRecipe;
+export default RecipeForm;

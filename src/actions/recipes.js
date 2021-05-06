@@ -33,3 +33,7 @@ export const deleteRecipe = (id) => async (dispatch) => {
 		console.log(error);
 	}
 }
+export const updateRecipe = (id, recipe) => async (dispatch) => {
+	console.log(1, id);
+	console.log(2, recipe);
+}
