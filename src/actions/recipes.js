@@ -17,3 +17,11 @@ export const createRecipe = (recipe) => async (dispatch) => {
 		console.log(error);
 	}
 }
+export const getRecipe = (id) => async (dispatch) => {
+	try {
+		const { data } = await api.getRecipe(id);
+		dispatch({ type: 'FETCH_ONE', payload: data })
+	} catch (error) {
+		console.log(error);
+	}
+}
