@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Button from '../../../elements/Button';
 
-import { getAllRecipes } from '../../../../actions/recipes';
+import { getAllRecipes, deleteRecipe } from '../../../../actions/recipes';
 
 import classes from './index.module.css';
 
@@ -49,7 +49,7 @@ const Recipes = () => {
 										<Button
 											type="button"
 											classes="danger naked"
-											eventClick={(e) => console.log('remove')}
+											eventClick={(e) => dispatch(deleteRecipe(recipe._id))}
 											label="remove"
 										/>
 									</div>

@@ -25,3 +25,11 @@ export const getRecipe = (id) => async (dispatch) => {
 		console.log(error);
 	}
 }
+export const deleteRecipe = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: 'DELETE', payload: id })
+		await api.deleteRecipe(id);
+	} catch (error) {
+		console.log(error);
+	}
+}
