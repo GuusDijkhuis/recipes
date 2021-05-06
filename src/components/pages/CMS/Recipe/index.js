@@ -17,23 +17,25 @@ const Recipes = () => {
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
 	return (
-		<div className={classes.container}>
-			<h1>Recipe: {id} </h1>
-			<div className={classes.fieldset}>
-				<div className={classes.info}>
-					<h3>Naam</h3>
-					<span>{recipe ? recipe.title : ''}</span>
-				</div>
-				<div className={classes.info}>
-					<h3>Kooktijd</h3>
-					<span>{recipe ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
-				</div>
-				<div className={classes.info}>
-					<h3>Personen</h3>
-					<span>{recipe ? recipe.personCount : ''}</span>
+		recipe ? (
+			<div className={classes.container}>
+				<h1>Recipe: {id} </h1>
+				<div className={classes.fieldset}>
+					<div className={classes.info}>
+						<h3>Naam</h3>
+						<span>{recipe.title}</span>
+					</div>
+					<div className={classes.info}>
+						<h3>Kooktijd</h3>
+						<span>{`${recipe.cookingtime.value} ${recipe.cookingtime.unit}`} </span>
+					</div>
+					<div className={classes.info}>
+						<h3>Personen</h3>
+						<span>{recipe.personCount}</span>
+					</div>
 				</div>
 			</div>
-		</div>
+		) : ''
 	);
 }
 

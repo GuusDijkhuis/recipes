@@ -17,7 +17,7 @@ const Recipes = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	return (
-		recipes.length !== 0 ? (
+		recipes ? (
 			<div className={classes.container}>
 				<h1>Recipes</h1>
 				<ul className={classes.list}>
@@ -27,33 +27,42 @@ const Recipes = () => {
 						<span>Time</span>
 					</li>
 					{
-						recipes.map((recipe, i) => (
+						recipes.length !== 0 ? (
+							recipes.map((recipe, i) => (
+								<li key={uuidv4()}>
+									<span>{i+1}</span>
+									<span>{recipe.title}</span>
+									<span>{recipe.cookingtime ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
+									<div className={classes.buttons}>
+										<Button
+											link={`/cms/recipes/${recipe._id}`}
+											type="button"
+											classes="secondary naked"
+											label="details"
+										/>
+										<Button
+											type="button"
+											classes="secondary naked"
+											eventClick={(e) => console.log('edit')}
+											label="edit"
+										/>
+										<Button
+											type="button"
+											classes="danger naked"
+											eventClick={(e) => console.log('remove')}
+											label="remove"
+										/>
+									</div>
+								</li>
+							))
+						) : (
 							<li key={uuidv4()}>
-								<span>{i}</span>
-								<span>{recipe.title}</span>
-								<span>{recipe.cookingtime ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
-								<div className={classes.buttons}>
-									<Button
-										link={`/cms/recipes/${recipe._id}`}
-										type="button"
-										classes="secondary naked"
-										label="details"
-									/>
-									<Button
-										type="button"
-										classes="secondary naked"
-										eventClick={(e) => console.log('edit')}
-										label="edit"
-									/>
-									<Button
-										type="button"
-										classes="danger naked"
-										eventClick={(e) => console.log('remove')}
-										label="remove"
-									/>
-								</div>
+								<span>-</span>
+								<span>-</span>
+								<span>-</span>
+								<span>-</span>
 							</li>
-						))
+						)
 					}
 				</ul>
 			</div>
