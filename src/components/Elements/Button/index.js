@@ -11,7 +11,7 @@ const Button = (props) => {
 				<button 
 					type={props.type ? props.type : 'submit'} 
 					className={`${props.classes}`} 
-					onClick={props.eventClick ? props.eventClick : ''}
+					onClick={ props.eventClick ? props.eventClick() :  () => {} }
 				>
 					{props.label}
 				</button>
@@ -20,7 +20,7 @@ const Button = (props) => {
 			<button 
 				type={props.type ? props.type : 'submit'} 
 				className={`${props.classes}`} 
-				onClick={props.eventClick ? props.eventClick : ''}
+				onClick={props.eventClick ? props.eventClick : () => {}}
 			>
 				{props.label}
 			</button>

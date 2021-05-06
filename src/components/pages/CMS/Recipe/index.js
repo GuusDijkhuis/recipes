@@ -14,28 +14,26 @@ const Recipes = () => {
 		dispatch(getRecipe(id))
 	}, [dispatch, id])
 
-	const recipe = useSelector((state) => state.recipes);
-	console.log(1, recipe);
+	const recipes = useSelector((state) => state.recipes);
+	const recipe = recipes[0];
 	return (
-		recipe.length !== 0 ? (
-			<div className={classes.container}>
-				<h1>Recipe: {id} </h1>
-				<div className={classes.fieldset}>
-					<div className={classes.info}>
-						<h3>Naam</h3>
-						<span>{recipe.title}</span>
-					</div>
-					<div className={classes.info}>
-						<h3>Kooktijd</h3>
-						<span>{recipe.cookingtime ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
-					</div>
-					<div className={classes.info}>
-						<h3>Personen</h3>
-						<span>{recipe.personCount}</span>
-					</div>
+		<div className={classes.container}>
+			<h1>Recipe: {id} </h1>
+			<div className={classes.fieldset}>
+				<div className={classes.info}>
+					<h3>Naam</h3>
+					<span>{recipe ? recipe.title : ''}</span>
+				</div>
+				<div className={classes.info}>
+					<h3>Kooktijd</h3>
+					<span>{recipe ? `${recipe.cookingtime.value} ${recipe.cookingtime.unit}` : ''}</span>
+				</div>
+				<div className={classes.info}>
+					<h3>Personen</h3>
+					<span>{recipe ? recipe.personCount : ''}</span>
 				</div>
 			</div>
-		) : ''
+		</div>
 	);
 }
 

@@ -3,7 +3,7 @@ const recipeReducers = (recipes = [], action) => {
 		case 'FETCH_ALL':
 			return action.payload;
 		case 'FETCH_ONE':
-			return action.payload;
+			return [action.payload];
 		case 'CREATE':
 			return [...recipes, action.payload];
 		default: 

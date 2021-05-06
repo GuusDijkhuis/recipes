@@ -16,7 +16,6 @@ const Recipes = () => {
 	}, [dispatch])
 
 	const recipes = useSelector((state) => state.recipes);
-	console.log(2, recipes);
 	return (
 		recipes.length !== 0 ? (
 			<div className={classes.container}>
@@ -38,7 +37,6 @@ const Recipes = () => {
 										link={`/cms/recipes/${recipe._id}`}
 										type="button"
 										classes="secondary naked"
-										eventClick={(e) => console.log('details')}
 										label="details"
 									/>
 									<Button
