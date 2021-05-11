@@ -5,6 +5,7 @@ import classes from './index.module.css';
 import '../../../globals.css';
 
 const Card = (props) => {
+	console.log(props.imageUrl);
 	return (
 		<li className={classes.card}>
 			<div className={classes.imageContainer}>
@@ -33,10 +34,10 @@ const Card = (props) => {
 				{
 					props.buttonLabel ? (
 						<Button
+							link={`/recipes/${props.id}`}
 							label={props.buttonLabel}
 							type="button"
 							classes="secondary"
-							eventClick={() => console.log('click')}
 						/>
 					) : ''
 				}

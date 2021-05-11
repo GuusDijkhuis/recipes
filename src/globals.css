@@ -17,21 +17,21 @@ h1 {
 	line-height: 58px;
 }
 h2, .h2 {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 }
 span {
-	font-size: 0.875rem;
-	font-weight: 400;
-	color: rgb(114, 114, 114);
-	line-height: 1rem;
+	/* font-size: 0.875rem; */
+	/* font-weight: 400;
+	color: rgb(114, 114, 114); */
+	/* line-height: 1rem; */
 }
 p {
-	font-size: 0.875rem;
+	/* font-size: 0.875rem;
 	font-weight: 300;
 	color: rgb(114, 114, 114);
 	line-height: 1rem;
-	margin-top: 0.5rem;
+	margin-top: 0.5rem; */
 }
 p + p {
 	margin-top: 0.5rem;
