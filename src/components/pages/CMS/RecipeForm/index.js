@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createRecipe } from '../../../../actions/recipes';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { createRecipe, updateRecipe } from '../../../../actions/recipes';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../../../elements/Button';
 
 import classes from './index.module.css';
 
-const AddRecipe = () => {
+const RecipeForm = () => {
+	const { currId } = useParams();
+	let recipe = useSelector((state) => state.recipes.filter(recipe => recipe._id === currId));
+
 	const dispatch = useDispatch();
+
 	const [recipeData, setRecipeData] = useState({
 		title: '',
 		picture: '',
 		introduction: '',
 		cookingtime: {
-			value: 0,
+			value: '0',
 			unit: ''
 		},
-		personCount: 0,
+		personCount: '0',
 		ingredients: [],
 		currIngredient: {
 			id: '',
@@ -40,6 +45,33 @@ const AddRecipe = () => {
 			}
 		}
 	})
+
+	useEffect(() => {
+		if(currId) {
+			setRecipeData({
+				...recipe[0],
+				currIngredient: {
+					name: '',
+					quantity: '',
+					unit: ''
+				},
+				currTool: {
+					id: '',
+					name: ''
+				},
+				currStep: {
+					id: '',
+					name: '',
+					description: '',
+					expectedtime: {
+						value: '',
+						unit: ''
+					}
+				}
+			})
+		}
+	}, []) 
+	
 
 	const addIngredient = () => {
 		setRecipeData({
@@ -78,14 +110,14 @@ const AddRecipe = () => {
 	}
 
 	const removeIngredient = (id) => {
-		const updatedIngredientList = recipeData.ingredients.filter(res => res.id !== id);
+		const updatedIngredientList = recipeData.ingredients.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			ingredients: updatedIngredientList
 		})
 	}
 	const removeTool = (id) => {
-		const updatedToolList = recipeData.tools.filter(res => res.id !== id);
+		const updatedToolList = recipeData.tools.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			tools: updatedToolList
@@ -93,17 +125,15 @@ const AddRecipe = () => {
 	}
 
 	const removeStep = (id) => {
-		const updatedStepList = recipeData.steps.filter(res => res.id !== id);
+		const updatedStepList = recipeData.steps.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			steps: updatedStepList
 		})
 	}
 
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		const formData = new FormData();
 		formData.append('title', recipeData.title);
 		formData.append('picture', recipeData.picture);
@@ -113,8 +143,11 @@ const AddRecipe = () => {
 		formData.append('ingredients', JSON.stringify([ ...recipeData.ingredients ]));
 		formData.append('tools', JSON.stringify([ ...recipeData.tools ]));
 		formData.append('steps', JSON.stringify([ ...recipeData.steps ]));
-		dispatch(createRecipe(formData));
-
+		if(currId) {
+			dispatch(updateRecipe(recipeData._id, formData));
+		} else {
+			dispatch(createRecipe(formData));
+		}
 		clear();
 	}
 
@@ -124,10 +157,10 @@ const AddRecipe = () => {
 			picture: '',
 			introduction: '',
 			cookingtime: {
-				value: 0,
+				value: '0',
 				unit: ''
 			},
-			personCount: 0,
+			personCount: '0',
 			ingredients: [],
 			currIngredient: {
 				id: '',
@@ -225,7 +258,7 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Ingredients</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Ingredient</span>
 									<span>Quantity</span>
 									<span>Unit</span>
@@ -233,7 +266,7 @@ const AddRecipe = () => {
 								{
 									recipeData.ingredients.length > 0 ? (
 										recipeData.ingredients.map((res) => (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<span>{res.quantity}</span>
 												<span>{res.unit}</span>
@@ -241,12 +274,12 @@ const AddRecipe = () => {
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeIngredient(res.id)}
+													eventClick={(e) => { removeIngredient(res._id) }}
 												/>
 											</li>
 										))
 									) : (
-										<li className={classes.formFieldListItem}>
+										<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 											<span>-</span>
 											<span>-</span>
@@ -304,24 +337,24 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Tools</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Tool</span>
 								</li>
 								{
 									recipeData.tools.length > 0 ? (
 										recipeData.tools.map((res) => (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<Button 
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeTool(res.id)}
+													eventClick={(e) => removeTool(res._id)}
 												/>
 											</li>
 										)
 									)) : (
-											<li className={classes.formFieldListItem}>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 										</li>
 									)
@@ -351,7 +384,7 @@ const AddRecipe = () => {
 						<label className={classes.formFieldLabel}>Steps</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
-								<li className={classes.formFieldListItem}>
+								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Nr.</span>
 									<span>Name</span>
 									<span>Expected Time</span>
@@ -359,20 +392,20 @@ const AddRecipe = () => {
 								{
 									recipeData.steps.length > 0 ? (
 										recipeData.steps.map((res, i) => (
-											<li className={classes.formFieldListItem}>
-												<span>{i}</span>
+											<li key={uuidv4()} className={classes.formFieldListItem}>
+												<span>{i+1}</span>
 												<span>{res.name}</span>
 												<span>{res.expectedtime.value} {res.expectedtime.unit}</span>
 												<Button 
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeStep(res.id)}
+													eventClick={(e) => removeStep(res._id)}
 												/>
 											</li>
 										)
 									)) : (
-											<li className={classes.formFieldListItem}>
+										<li key={uuidv4()} className={classes.formFieldListItem}>
 											<span>-</span>
 											<span>-</span>
 											<span>-</span>
@@ -449,4 +482,4 @@ const AddRecipe = () => {
 	);
 }
 
-export default AddRecipe;
+export default RecipeForm;

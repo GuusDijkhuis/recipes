@@ -20,6 +20,7 @@ export default function App() {
 				<Route exact path="/cms/add-recipe" component={ () => <Cms /> } />
 				<Route exact path="/cms/recipes" component={ () => <Cms /> } />
 				<Route exact path="/cms/recipes/:id" component={ () => <Cms /> } />
+				<Route exact path="/cms/recipes/edit/:id"  component={ () => <Cms /> } />
 				<Route exact path="/" component={ () => <Home /> } />
 			</Switch>
 		</div>

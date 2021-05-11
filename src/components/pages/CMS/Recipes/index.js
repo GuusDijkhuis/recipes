@@ -41,9 +41,9 @@ const Recipes = () => {
 											label="details"
 										/>
 										<Button
+											link={`/cms/recipes/edit/${recipe._id}`}
 											type="button"
 											classes="secondary naked"
-											eventClick={(e) => console.log('edit')}
 											label="edit"
 										/>
 										<Button

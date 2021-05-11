@@ -33,3 +33,11 @@ export const deleteRecipe = (id) => async (dispatch) => {
 		console.log(error);
 	}
 }
+export const updateRecipe = (id, recipe) => async (dispatch) => {
+	try {
+		const { data } = await api.updateRecipe(id, recipe);
+		dispatch({ type: 'UPDATE', payload: data })
+	} catch (error) {
+		console.log(error);
+	}
+}

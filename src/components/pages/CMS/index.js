@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Switch, Route } from 'react-router-dom'; 
 
 import Nav from './Nav';
-import AddRecipe from './AddRecipe';
+import RecipeForm from './RecipeForm';
 import Recipes from './Recipes';
 import Recipe from './Recipe';
 
@@ -17,9 +17,10 @@ const Cms = () => {
 				<Nav />
 				<div className={classes.container}>
 					<Switch>
-						<Route exact path="/cms/add-recipe" component={ () => <AddRecipe/> } />
+						<Route exact path="/cms/add-recipe" component={ () => <RecipeForm /> } />
 						<Route exact path="/cms/recipes"  component={ () => <Recipes /> } />
 						<Route exact path="/cms/recipes/:id"  component={ () => <Recipe /> } />
+						<Route exact path="/cms/recipes/edit/:currId"  component={ () => <RecipeForm /> } />
 					</Switch>
 				</div>
 			</Router>

@@ -4,6 +4,7 @@ const recipeReducers = (recipes = [], action) => {
 			return action.payload;
 		case 'FETCH_ONE':
 			return [action.payload];
+		case 'UPDATE':
 		case 'CREATE':
 			return [...recipes, action.payload];
 		case 'DELETE':
