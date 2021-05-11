@@ -1,10 +1,8 @@
 import React from 'react';
 
 import Cms from './components/pages/CMS';
-import Home from './components/pages/Home';
 import Recipe from './components/pages/Recipe';
 import Recipes from './components/pages/Recipes';
-import About from './components/pages/About';
 
 import {
 	Switch,
@@ -15,15 +13,13 @@ export default function App() {
 	return (
 		<div>
 			<Switch>
-				<Route exact path="/recipes" component={ () => <Recipes /> } />
 				<Route exact path="/recipes/:id" component={ () => <Recipe /> } />
-				<Route exact path="/about-us"  component={ () => <About /> } />
 				<Route exact path="/cms" component={ () => <Cms /> } />
 				<Route exact path="/cms/add-recipe" component={ () => <Cms /> } />
 				<Route exact path="/cms/recipes" component={ () => <Cms /> } />
 				<Route exact path="/cms/recipes/:id" component={ () => <Cms /> } />
 				<Route exact path="/cms/recipes/edit/:id"  component={ () => <Cms /> } />
-				<Route exact path="/" component={ () => <Home /> } />
+				<Route exact path="/" component={ () => <Recipes /> } />
 			</Switch>
 		</div>
 	);

@@ -13,7 +13,7 @@ const Recipes = () => {
 		dispatch(getAllRecipes())
 	}, [dispatch])
 
-	let recipes = useSelector((state) => state.recipes);
+	const recipes = useSelector((state) => state.recipes);
 	return (
 		recipes ? (
 			<div>
