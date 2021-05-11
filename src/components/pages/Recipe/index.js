@@ -76,10 +76,7 @@ const Recipe = () => {
 												recipe.steps.map((step, i) => (
 													<li>
 														<h3>{`${i+1} ${step.name}`}</h3>
-														<div className={classes.stepListContent}>
-															<p>{step.description}</p>
-															<span>{`${step.expectedtime.value} ${step.expectedtime.unit}`}</span>
-														</div>
+														<p>{step.description}</p>
 													</li>
 												)
 											)}
