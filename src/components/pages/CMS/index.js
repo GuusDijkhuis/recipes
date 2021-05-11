@@ -20,7 +20,7 @@ const Cms = () => {
 						<Route exact path="/cms/add-recipe" component={ () => <RecipeForm /> } />
 						<Route exact path="/cms/recipes"  component={ () => <Recipes /> } />
 						<Route exact path="/cms/recipes/:id"  component={ () => <Recipe /> } />
-						<Route exact path="/cms/recipes/edit/:id"  component={ () => <RecipeForm /> } />
+						<Route exact path="/cms/recipes/edit/:currId"  component={ () => <RecipeForm /> } />
 					</Switch>
 				</div>
 			</Router>

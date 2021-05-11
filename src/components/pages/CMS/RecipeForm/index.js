@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { createRecipe, getRecipe } from '../../../../actions/recipes';
+import { createRecipe, updateRecipe } from '../../../../actions/recipes';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../../../elements/Button';
 
 import classes from './index.module.css';
 
 const RecipeForm = () => {
-	const { id } = useParams();
+	const { currId } = useParams();
+	let recipe = useSelector((state) => state.recipes.filter(recipe => recipe._id === currId));
+
 	const dispatch = useDispatch();
 
 	const [recipeData, setRecipeData] = useState({
@@ -16,10 +18,10 @@ const RecipeForm = () => {
 		picture: '',
 		introduction: '',
 		cookingtime: {
-			value: 0,
+			value: '0',
 			unit: ''
 		},
-		personCount: 0,
+		personCount: '0',
 		ingredients: [],
 		currIngredient: {
 			id: '',
@@ -43,11 +45,33 @@ const RecipeForm = () => {
 			}
 		}
 	})
+
 	useEffect(() => {
-		if(id) {
-			getRecipe(id);
+		if(currId) {
+			setRecipeData({
+				...recipe[0],
+				currIngredient: {
+					name: '',
+					quantity: '',
+					unit: ''
+				},
+				currTool: {
+					id: '',
+					name: ''
+				},
+				currStep: {
+					id: '',
+					name: '',
+					description: '',
+					expectedtime: {
+						value: '',
+						unit: ''
+					}
+				}
+			})
 		}
-	}, [id])
+	}, []) 
+	
 
 	const addIngredient = () => {
 		setRecipeData({
@@ -86,14 +110,14 @@ const RecipeForm = () => {
 	}
 
 	const removeIngredient = (id) => {
-		const updatedIngredientList = recipeData.ingredients.filter(res => res.id !== id);
+		const updatedIngredientList = recipeData.ingredients.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			ingredients: updatedIngredientList
 		})
 	}
 	const removeTool = (id) => {
-		const updatedToolList = recipeData.tools.filter(res => res.id !== id);
+		const updatedToolList = recipeData.tools.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			tools: updatedToolList
@@ -101,7 +125,7 @@ const RecipeForm = () => {
 	}
 
 	const removeStep = (id) => {
-		const updatedStepList = recipeData.steps.filter(res => res.id !== id);
+		const updatedStepList = recipeData.steps.filter(res => res._id !== id);
 		setRecipeData({
 			...recipeData,
 			steps: updatedStepList
@@ -110,7 +134,6 @@ const RecipeForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		const formData = new FormData();
 		formData.append('title', recipeData.title);
 		formData.append('picture', recipeData.picture);
@@ -120,8 +143,11 @@ const RecipeForm = () => {
 		formData.append('ingredients', JSON.stringify([ ...recipeData.ingredients ]));
 		formData.append('tools', JSON.stringify([ ...recipeData.tools ]));
 		formData.append('steps', JSON.stringify([ ...recipeData.steps ]));
-		dispatch(createRecipe(formData));
-
+		if(currId) {
+			dispatch(updateRecipe(recipeData._id, formData));
+		} else {
+			dispatch(createRecipe(formData));
+		}
 		clear();
 	}
 
@@ -131,10 +157,10 @@ const RecipeForm = () => {
 			picture: '',
 			introduction: '',
 			cookingtime: {
-				value: 0,
+				value: '0',
 				unit: ''
 			},
-			personCount: 0,
+			personCount: '0',
 			ingredients: [],
 			currIngredient: {
 				id: '',
@@ -248,7 +274,7 @@ const RecipeForm = () => {
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeIngredient(res.id)}
+													eventClick={(e) => { removeIngredient(res._id) }}
 												/>
 											</li>
 										))
@@ -323,7 +349,7 @@ const RecipeForm = () => {
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeTool(res.id)}
+													eventClick={(e) => removeTool(res._id)}
 												/>
 											</li>
 										)
@@ -374,7 +400,7 @@ const RecipeForm = () => {
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeStep(res.id)}
+													eventClick={(e) => removeStep(res._id)}
 												/>
 											</li>
 										)
