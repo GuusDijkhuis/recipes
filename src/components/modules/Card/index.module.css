@@ -1,28 +1,40 @@
 .card {
-	width: 300px;
+	width: 30%;
 	height: 450px;
 	box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
 	overflow: hidden;
 }
+@media only screen and (max-width: 1280px) {
+	.card {
+		width: 48%;
+	}
+}
+@media only screen and (max-width: 480px) {
+	.card {
+		width: 100%;
+	}
+}
+
 .card img {
 	display: block;
 	width: 100%;
-	min-height: 50%;
+	min-height: 100%;
 	overflow: hidden;
 }
 .imageContainer {
 	overflow: hidden;
-	height: 50%;
+	height: 40%;
 }
 .card header {
-	display: block;
-	height: 50%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	padding: 1.5rem;
 	flex-basis: 60%;
 	background-color: white;
 }
 .card header > h2 {
-	height: 2.5rem;
+	/* height: 2.5rem; */
 }
 .card button {
 	margin-left: auto; 
