@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createRecipe, updateRecipe } from '../../../../actions/recipes';
 import { v4 as uuidv4 } from 'uuid';
-import Button from '../../../elements/Button';
+import Button from '../../../elements/Button/index.js';
 
 import classes from './index.module.css';
 
