@@ -16,6 +16,8 @@ const Recipe = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
+	console.log(recipes);
+
 	return (
 			<div>
 				<Nav />
