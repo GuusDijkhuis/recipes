@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createRecipe, updateRecipe } from '../../../../actions/recipes';
 import { v4 as uuidv4 } from 'uuid';
+
 import Button from '../../../elements/Button/index.js';
 
 import classes from './index.module.css';
@@ -19,7 +20,7 @@ const RecipeForm = () => {
 		introduction: '',
 		cookingtime: {
 			value: '0',
-			unit: ''
+			unit: 'uur'
 		},
 		personCount: '0',
 		ingredients: [],
@@ -27,7 +28,7 @@ const RecipeForm = () => {
 			id: '',
 			name: '',
 			quantity: '',
-			unit: ''
+			unit: 'stuks'
 		},
 		tools: [],
 		currTool: {
@@ -41,9 +42,12 @@ const RecipeForm = () => {
 			description: '',
 			expectedtime: {
 				value: '',
-				unit: ''
+				unit: 'uur'
 			}
 		}
+	})
+	const [errorData, setError] = useState({
+		error: false
 	})
 
 	useEffect(() => {
@@ -53,7 +57,7 @@ const RecipeForm = () => {
 				currIngredient: {
 					name: '',
 					quantity: '',
-					unit: ''
+					unit: 'stuks'
 				},
 				currTool: {
 					id: '',
@@ -65,7 +69,7 @@ const RecipeForm = () => {
 					description: '',
 					expectedtime: {
 						value: '',
-						unit: ''
+						unit: 'uur'
 					}
 				}
 			})
@@ -80,7 +84,7 @@ const RecipeForm = () => {
 			currIngredient: {
 				name: '',
 				quantity: '',
-				unit: ''
+				unit: 'stuks'
 			}
 		})
 	}
@@ -103,21 +107,21 @@ const RecipeForm = () => {
 				description: '',
 				expectedtime: {
 					value: '',
-					unit: ''
+					unit: 'uur'
 				}
 			}
 		})
 	}
 
 	const removeIngredient = (id) => {
-		const updatedIngredientList = recipeData.ingredients.filter(res => res._id !== id);
+		const updatedIngredientList = recipeData.ingredients.filter(res => res.id !== id);
 		setRecipeData({
 			...recipeData,
 			ingredients: updatedIngredientList
 		})
 	}
 	const removeTool = (id) => {
-		const updatedToolList = recipeData.tools.filter(res => res._id !== id);
+		const updatedToolList = recipeData.tools.filter(res => res.id !== id);
 		setRecipeData({
 			...recipeData,
 			tools: updatedToolList
@@ -125,7 +129,7 @@ const RecipeForm = () => {
 	}
 
 	const removeStep = (id) => {
-		const updatedStepList = recipeData.steps.filter(res => res._id !== id);
+		const updatedStepList = recipeData.steps.filter(res => res.id !== id);
 		setRecipeData({
 			...recipeData,
 			steps: updatedStepList
@@ -143,14 +147,53 @@ const RecipeForm = () => {
 		formData.append('ingredients', JSON.stringify([ ...recipeData.ingredients ]));
 		formData.append('tools', JSON.stringify([ ...recipeData.tools ]));
 		formData.append('steps', JSON.stringify([ ...recipeData.steps ]));
-		if(currId) {
-			dispatch(updateRecipe(recipeData._id, formData));
+
+		const validate = formValidation();
+		if(validate) {
+			if(currId) {
+				dispatch(updateRecipe(recipeData._id, formData));
+			} else {
+				dispatch(createRecipe(formData));
+			}
+			clear();
 		} else {
-			dispatch(createRecipe(formData));
+			setError({
+				error: true
+			})
 		}
-		clear();
+		
+	}
+	
+	const formValidation = () => {
+		let arr = [
+			isValid(recipeData.title),
+			isValid(recipeData.introduction),
+			isValid(recipeData.picture),
+			isValid(recipeData.cookingtime.value),
+			isValid(recipeData.cookingtime.unit),
+			isValid(recipeData.personCount),
+			isValid(recipeData.ingredients[0]),
+			isValid(recipeData.tools[0]),
+			isValid(recipeData.steps[0]),
+		]
+		return arr.includes(false) ? false : true;
 	}
 
+	const isValid = (value) => {
+		switch (typeof(value)) {
+			case 'undefined':
+				return false;
+			case 'string':
+				return value.length > 0 ? true : false;
+			case 'object':
+				return value.name !== '' ? true : false;
+			default:
+				break;
+		}
+	}
+	const handleErrorClose = () => {
+		setError({ error: false });
+	}
 	const clear = () => {
 		setRecipeData({
 			title: '',
@@ -158,7 +201,7 @@ const RecipeForm = () => {
 			introduction: '',
 			cookingtime: {
 				value: '0',
-				unit: ''
+				unit: 'hour'
 			},
 			personCount: '0',
 			ingredients: [],
@@ -166,7 +209,7 @@ const RecipeForm = () => {
 				id: '',
 				name: '',
 				quantity: '',
-				unit: ''
+				unit: 'stuks'
 			},
 			tools: [],
 			currTool: {
@@ -180,18 +223,27 @@ const RecipeForm = () => {
 				description: '',
 				expectedtime: {
 					value: '',
-					unit: ''
+					unit: 'uur'
 				}
 			}
 		})
 	}
+	
 	return (
 		<div className={classes.container}>
 			<form className={classes.form} onSubmit={handleSubmit} encType="multipart/form-data">
-				<h1 className={classes.formTitle}>Recipe Form</h1>
+				{
+					errorData.error ? (
+						<div className={classes.error}>
+							<span>Niet alles is goed ingevoerd!</span>
+							<button onClick={handleErrorClose}>Sluit</button>
+						</div>
+					) : ''
+				}
+				<h1 className={classes.formTitle}>Recepten Formulier</h1>
 				<fieldset>
 					<div className={classes.formField}>
-						<label className={classes.formFieldLabel}>Title</label>
+						<label className={classes.formFieldLabel}>Naam</label>
 						<input 
 							className={classes.formFieldInput}
 							type="text" 
@@ -201,7 +253,7 @@ const RecipeForm = () => {
 						/>
 					</div>
 					<div className={classes.formField}>
-						<label className={classes.formFieldLabel}>Picture</label>
+						<label className={classes.formFieldLabel}>Afbeelding</label>
 						<input 
 							className={classes.formFieldInput}
 							type="file" 
@@ -211,7 +263,7 @@ const RecipeForm = () => {
 						/>
 					</div>
 					<div className={classes.formField}>
-						<label className={classes.formFieldLabel}>Introduction</label>
+						<label className={classes.formFieldLabel}>Introductie</label>
 						<textarea 
 							className={classes.formFieldInput}
 							name="introduction" 
@@ -220,7 +272,7 @@ const RecipeForm = () => {
 						/>
 					</div>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Cooking Time</label>
+						<label className={classes.formFieldLabel}>Bereidingstijd</label>
 						<div className={classes.formFieldContent}>
 							<div className={classes.formDropDown}>
 								<input 
@@ -236,14 +288,14 @@ const RecipeForm = () => {
 									value={recipeData.cookingtime.unit} 
 									onChange={(e) => setRecipeData({ ...recipeData, cookingtime: { ...recipeData.cookingtime, unit: e.target.value }})}
 								>
-									<option value="hour">hour</option>
-									<option value="minutes">minutes</option>
+									<option value="uur">Uur</option>
+									<option value="minuten">Minuten</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Persons</label>
+						<label className={classes.formFieldLabel}>Personen</label>
 						<input 
 							className={classes.formFieldInput}
 							type="text" 
@@ -255,13 +307,13 @@ const RecipeForm = () => {
 				</fieldset>
 				<fieldset>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Ingredients</label>
+						<label className={classes.formFieldLabel}>Ingrediënten</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
 								<li key={uuidv4()} className={classes.formFieldListItem}>
-									<span>Ingredient</span>
-									<span>Quantity</span>
-									<span>Unit</span>
+									<span>Ingrediënt</span>
+									<span>Aantal</span>
+									<span>Soort</span>
 								</li>
 								{
 									recipeData.ingredients.length > 0 ? (
@@ -271,10 +323,10 @@ const RecipeForm = () => {
 												<span>{res.quantity}</span>
 												<span>{res.unit}</span>
 												<Button 
-													label='Remove'
+													label='Verwijder'
 													type='button'
 													classes='danger'
-													eventClick={(e) => { removeIngredient(res._id) }}
+													eventClick={(e) => { removeIngredient(res.id) }}
 												/>
 											</li>
 										))
@@ -295,7 +347,7 @@ const RecipeForm = () => {
 									name="ingredientName"
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, name: e.target.value }})}
 									value={recipeData.currIngredient.name}
-									placeholder="ingredient"
+									placeholder="Ingrediënt"
 								/>
 								<input 
 									className={classes.formDropDownInput}
@@ -303,27 +355,27 @@ const RecipeForm = () => {
 									name="ingredientQuantity"
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, quantity: e.target.value }})}
 									value={recipeData.currIngredient.quantity}
-									placeholder="quantity"
+									placeholder="Aantal"
 								/>
 								<select 
 									className={classes.formDropDownSelect} 
 									name="ingredientUnit"
 									onChange={(e) => setRecipeData({ ...recipeData, currIngredient: { ...recipeData.currIngredient, unit: e.target.value }})}
-									placeholder="tablespoon"
+									placeholder="Stuks"
 								>
-									<option default value="pieces">Piece(s)</option>
-									<option value="tablespoon">Tbsp</option>
-									<option value="teaspoon">Tsp</option>
-									<option value="gram">Grams</option>
-									<option value="pound">Pounds</option>
-									<option value="kilo">Kilos</option>
-									<option value="liter">L</option>
-									<option value="mililiter">Ml</option>
-									<option value="cloves">Cloves</option>
-									<option value="leaves">Leaves</option>
+									<option value="stuks">Stuks</option>
+									<option value="eetlepel">Eetlepel</option>
+									<option value="theelepel">Theelepel</option>
+									<option value="gram">Gram</option>
+									<option value="pond">Pond</option>
+									<option value="kilo">Kilo</option>
+									<option value="liter">Liter</option>
+									<option value="mililiter">Mililiter</option>
+									<option value="tenen">Tenen</option>
+									<option value="blaadjes">Blaadjes</option>
 								</select>
 								<Button 
-									label='Add'
+									label='Voeg toe'
 									type='button'
 									classes='secondary secondary-underline'
 									eventClick={addIngredient}
@@ -334,11 +386,11 @@ const RecipeForm = () => {
 				</fieldset>
 				<fieldset>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Tools</label>
+						<label className={classes.formFieldLabel}>Benodigdheden</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
 								<li key={uuidv4()} className={classes.formFieldListItem}>
-									<span>Tool</span>
+									<span>Benodigdheden</span>
 								</li>
 								{
 									recipeData.tools.length > 0 ? (
@@ -346,10 +398,10 @@ const RecipeForm = () => {
 											<li key={uuidv4()} className={classes.formFieldListItem}>
 												<span>{res.name}</span>
 												<Button 
-													label='Remove'
+													label='Verwijder'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeTool(res._id)}
+													eventClick={(e) => removeTool(res.id)}
 												/>
 											</li>
 										)
@@ -367,10 +419,10 @@ const RecipeForm = () => {
 									name="toolName"
 									onChange={(e) => setRecipeData({ ...recipeData, currTool: { ...recipeData.currTool, name: e.target.value }})}
 									value={recipeData.currTool.name}
-									placeholder="tool"
+									placeholder="benodigdheden"
 								/>
 								<Button 
-									label='Add'
+									label='Voeg toe'
 									type='button'
 									classes='secondary secondary-underline'
 									eventClick={addTool}
@@ -381,13 +433,13 @@ const RecipeForm = () => {
 				</fieldset>
 				<fieldset>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Steps</label>
+						<label className={classes.formFieldLabel}>Stappen</label>
 						<div className={classes.formFieldContent}>
 							<ul className={classes.formFieldList}>
 								<li key={uuidv4()} className={classes.formFieldListItem}>
 									<span>Nr.</span>
-									<span>Name</span>
-									<span>Expected Time</span>
+									<span>Naam</span>
+									<span>Geschatte tijd</span>
 								</li>
 								{
 									recipeData.steps.length > 0 ? (
@@ -400,7 +452,7 @@ const RecipeForm = () => {
 													label='Remove'
 													type='button'
 													classes='danger'
-													eventClick={(e) => removeStep(res._id)}
+													eventClick={(e) => removeStep(res.id)}
 												/>
 											</li>
 										)
@@ -416,7 +468,7 @@ const RecipeForm = () => {
 						</div>
 					</div>
 					<div className={classes.formField}>
-						<label className={classes.formFieldLabel}>Name</label>
+						<label className={classes.formFieldLabel}>Stap</label>
 						<input 
 							className={classes.formFieldInput}
 							type="text" 
@@ -425,7 +477,7 @@ const RecipeForm = () => {
 						/>
 					</div>
 					<div className={classes.formField}>
-						<label className={classes.formFieldLabel}>Description</label>
+						<label className={classes.formFieldLabel}>Beschrijving</label>
 						<textarea 
 							className={classes.formFieldInput}
 							type="text" 
@@ -434,7 +486,7 @@ const RecipeForm = () => {
 						/>
 					</div>
 					<div className={`${classes.formField}`}>
-						<label className={classes.formFieldLabel}>Expected Time</label>
+						<label className={classes.formFieldLabel}>Verwachtte tijd</label>
 						<div className={classes.formFieldContent}>
 							<div className={classes.formDropDown}>
 								<input 
@@ -459,11 +511,11 @@ const RecipeForm = () => {
 										}
 									})}
 								>
-									<option value="hour">hour</option>
-									<option value="minutes">minutes</option>
+									<option value="uur">Uur</option>
+									<option value="minuten">Minuten</option>
 								</select>
 								<Button 
-									label='Add'
+									label='Voeg toe'
 									type='button'
 									classes='secondary secondary-underline'
 									eventClick={addStep}

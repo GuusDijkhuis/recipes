@@ -1,6 +1,7 @@
 .container {
-	margin-top: 5rem;
-	width: clamp(720px, 80%, 320px);
+	margin-top: 6rem;
+	width: clamp(320px, 80%, 720px);
+	box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
 	padding: 0 1rem;
 }
 .fieldset {

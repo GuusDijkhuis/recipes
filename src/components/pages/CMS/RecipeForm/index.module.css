@@ -101,3 +101,33 @@ textarea {
 	resize: none;
 	height: 7rem;
 }
+.error {
+	background-color: tomato;
+	font-size: 1.5rem;
+	position: fixed;
+	top: 6rem;
+	right: 1rem;
+	width: 50%;
+	max-width: 20rem;
+	padding: 1rem;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.error > span {
+	color: black;
+}
+.error > button {
+	color: black;
+	background-color: rgba(255,255,255,0.5);
+	padding: .5rem;
+}
+
+@media only screen and (max-width: 700px) {
+	.error {
+		position: inherit;
+		width: 100%;
+		max-width: inherit;
+	}
+}
