@@ -16,15 +16,15 @@ const Recipes = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
+	console.log(recipe);
 	return (
 		recipe ? (
 			<div className={classes.container}>
-				<h1>Recipe: {id} </h1>
+				<h1>{recipe.title}</h1>
 				<div className={classes.fieldset}>
-					<div className={classes.info}>
-						<h3>Naam</h3>
-						<span>{recipe.title}</span>
-					</div>
+					<img src={`http://localhost:5000/${recipe.picture}`} alt={recipe.title} />
+				</div>
+				<div className={classes.fieldset}>
 					<div className={classes.info}>
 						<h3>Kooktijd</h3>
 						<span>{`${recipe.cookingtime.value} ${recipe.cookingtime.unit}`} </span>
@@ -33,6 +33,45 @@ const Recipes = () => {
 						<h3>Personen</h3>
 						<span>{recipe.personCount}</span>
 					</div>
+				</div>
+				<div className={classes.fieldset}>
+					<h3>Ingredients</h3>
+					<ul>
+						{ 
+							recipe.ingredients.map((ingredient, i) => (
+								<li className={classes.info}>
+									<span>{`${ingredient.name}`}</span>
+									<span>{`${ingredient.quantity} ${ingredient.unit}`}</span>
+								</li>
+								)
+							)
+						}
+					</ul>
+				</div>
+				<div className={classes.fieldset}>
+					<h3>Tools</h3>
+					<ul>
+						{ 
+							recipe.tools.map((tool, i) => (
+								<li className={classes.info}>
+									<span>{tool.name}</span>
+								</li>
+							)
+						)}
+					</ul>
+				</div>
+				<div className={classes.fieldset}>
+					<h3>Tools</h3>
+					<ul>
+						{ 
+							recipe.steps.map((step, i) => (
+								<li className={classes.step}>
+									<h3>{`${i+1} ${step.name}`}</h3>
+									<p>{step.description}</p>
+								</li>
+							)
+						)}
+					</ul>
 				</div>
 			</div>
 		) : ''

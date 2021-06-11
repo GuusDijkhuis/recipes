@@ -1,5 +1,7 @@
 .container {
 	margin-top: 5rem;
+	width: clamp(720px, 80%, 320px);
+	padding: 0 1rem;
 }
 .fieldset {
 	margin-top: 1rem;
@@ -9,4 +11,8 @@
 .info {
 	display: flex;
 	text-align: center;
+	justify-content: space-between;
+}
+.step {
+	margin: 1rem 0;
 }

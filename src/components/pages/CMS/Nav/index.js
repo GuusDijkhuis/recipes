@@ -7,7 +7,7 @@ import classes from './index.module.css';
 const Nav = () => {
 	return (
 		<nav className={classes.nav}>
-			<a href="http://localhost:3000">
+			<a href="/">
 				<h1>CMS</h1>
 			</a>
 			<ul>
