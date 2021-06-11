@@ -148,8 +148,7 @@ const RecipeForm = () => {
 		formData.append('tools', JSON.stringify([ ...recipeData.tools ]));
 		formData.append('steps', JSON.stringify([ ...recipeData.steps ]));
 
-		const validate = formValidation();
-		if(validate) {
+		if(formValidation()) {
 			if(currId) {
 				dispatch(updateRecipe(recipeData._id, formData));
 			} else {
