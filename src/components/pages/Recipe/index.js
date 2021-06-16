@@ -16,8 +16,6 @@ const Recipe = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
-	// const baseUrl = window.location.origin === 'https://recipes-gd.netlify.app' ? 'https://recipes-application.herokuapp.com' : 'http://localhost:5000';
-	// console.log(recipe);
 	return (
 			<div>
 				<Nav />
