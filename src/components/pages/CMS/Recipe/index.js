@@ -22,7 +22,7 @@ const Recipes = () => {
 			<div className={classes.container}>
 				<h1>{recipe.title}</h1>
 				<div className={classes.fieldset}>
-					<img src={`http://localhost:5000/${recipe.picture}`} alt={recipe.title} />
+					<img src={`https://recipes-application.herokuapp.com/${recipe.picture}`} alt={recipe.title} />
 				</div>
 				<div className={classes.fieldset}>
 					<div className={classes.info}>
