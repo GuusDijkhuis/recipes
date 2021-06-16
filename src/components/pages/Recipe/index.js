@@ -16,6 +16,7 @@ const Recipe = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
+	const baseUrl = window.location.origin === 'https://recipes-gd.netlify.app' ? 'https://recipes-gd.netlify.app' : 'http://localhost:5000';
 	return (
 			<div>
 				<Nav />
@@ -30,7 +31,7 @@ const Recipe = () => {
 									</div>
 								</div>
 								<div>
-									<img src={`https://recipes-gd.netlify.app/${recipe.picture}`} alt={recipe.title} />
+									<img src={`${baseUrl}/${recipe.picture}`} alt={recipe.title} />
 								</div>
 								<div>
 									<div className={classes.header}>
