@@ -5,7 +5,6 @@ import classes from './index.module.css';
 import '../../../globals.css';
 
 const Card = (props) => {
-	console.log(props.imageUrl);
 	return (
 		<li className={classes.card}>
 			<div className={classes.imageContainer}>

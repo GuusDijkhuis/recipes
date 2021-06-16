@@ -131,3 +131,24 @@ textarea {
 		max-width: inherit;
 	}
 }
+@media only screen and (max-width: 1280px) {
+	.formField {
+		margin-top: 0.75rem;
+		display: block;
+		width: 100%;
+	}
+	.formFieldLabel {
+		width: 100%;
+		display: block;
+	}
+	.formFieldInput {
+		width: 100%;
+	}
+	.formFieldContent {
+		width: 100%;
+	}
+	.formFieldInputRow + button {
+		margin-top: 1rem;
+		width: 25%;
+	}
+}

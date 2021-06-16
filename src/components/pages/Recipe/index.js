@@ -16,7 +16,8 @@ const Recipe = () => {
 
 	const recipes = useSelector((state) => state.recipes);
 	const recipe = recipes[0];
-	const baseUrl = window.location.origin === 'https://recipes-gd.netlify.app' ? 'https://recipes-gd.netlify.app' : 'http://localhost:5000';
+	// const baseUrl = window.location.origin === 'https://recipes-gd.netlify.app' ? 'https://recipes-application.herokuapp.com' : 'http://localhost:5000';
+	// console.log(recipe);
 	return (
 			<div>
 				<Nav />
@@ -31,7 +32,7 @@ const Recipe = () => {
 									</div>
 								</div>
 								<div>
-									<img src={`${baseUrl}/${recipe.picture}`} alt={recipe.title} />
+									<img src={`https://recipes-application.herokuapp.com/${recipe.picture}`} alt={recipe.title} />
 								</div>
 								<div>
 									<div className={classes.header}>
@@ -46,9 +47,9 @@ const Recipe = () => {
 										<ul className={classes.list}>
 											{ 
 												recipe.ingredients.map((ingredient, i) => (
-													<li>
-													<span>{`${ingredient.name}`}</span>
-													<span>{`${ingredient.quantity} ${ingredient.unit}`}</span>
+													<li key={i}>
+														<span>{`${ingredient.name}`}</span>
+														<span>{`${ingredient.quantity} ${ingredient.unit}`}</span>
 													</li>
 												)
 											)}
@@ -61,7 +62,7 @@ const Recipe = () => {
 										<ul className={classes.list}>
 											{ 
 												recipe.tools.map((tool, i) => (
-													<li>
+													<li key={i}>
 														<span>{tool.name}</span>
 													</li>
 												)
@@ -75,7 +76,7 @@ const Recipe = () => {
 										<ul className={classes.stepList}>
 											{ 
 												recipe.steps.map((step, i) => (
-													<li>
+													<li key={i}>
 														<h3>{`${i+1} ${step.name}`}</h3>
 														<p>{step.description}</p>
 													</li>

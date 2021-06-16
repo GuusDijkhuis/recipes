@@ -1,9 +1,10 @@
 const recipeReducers = (recipes = [], action) => {
+	
 	switch(action.type) {
 		case 'FETCH_ALL':
 			return action.payload;
 		case 'FETCH_ONE':
-			return [action.payload];
+			return [action.payload._doc];
 		case 'UPDATE':
 		case 'CREATE':
 			return [...recipes, action.payload];

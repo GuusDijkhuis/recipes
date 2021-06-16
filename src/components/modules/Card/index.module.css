@@ -39,6 +39,7 @@
 .card button {
 	margin-left: auto; 
 	display: block;
+	margin-top: 2rem;
 }
 .card ul {
 	display: flex;
@@ -48,9 +49,11 @@
 	margin-top: 0.5rem;
 }
 .card p {
-	line-height: 0.875rem;
-	height: 5rem;
-	overflow: hidden;
+	line-height: 1rem;
+	min-height: 5rem;
+	max-height: 7rem;
+	overflow: scroll;
+	
 }
 .tag {
 	color: #727272;
