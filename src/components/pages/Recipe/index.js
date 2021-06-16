@@ -30,7 +30,7 @@ const Recipe = () => {
 									</div>
 								</div>
 								<div>
-									<img src={`http://localhost:5000/${recipe.picture}`} alt={recipe.title} />
+									<img src={`https://recipes-gd.netlify.app/${recipe.picture}`} alt={recipe.title} />
 								</div>
 								<div>
 									<div className={classes.header}>
