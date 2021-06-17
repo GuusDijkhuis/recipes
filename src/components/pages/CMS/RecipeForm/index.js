@@ -447,7 +447,7 @@ const RecipeForm = () => {
 												<span>{res.name}</span>
 												<span>{res.expectedtime.value} {res.expectedtime.unit}</span>
 												<Button 
-													label='Remove'
+													label='Verwijder'
 													type='button'
 													classes='danger'
 													eventClick={(e) => removeStep(res.id)}
