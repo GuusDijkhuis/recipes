@@ -366,7 +366,6 @@ const RecipeForm = () => {
 									<option value="eetlepel">Eetlepel</option>
 									<option value="theelepel">Theelepel</option>
 									<option value="gram">Gram</option>
-									<option value="pond">Pond</option>
 									<option value="kilo">Kilo</option>
 									<option value="liter">Liter</option>
 									<option value="mililiter">Mililiter</option>

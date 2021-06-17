@@ -6,6 +6,8 @@ import Card from '../../modules/Card';
 import classes from './index.module.css';
 import { getAllRecipes } from '../../../actions/recipes';
 
+import { translateUnit } from '../../../helpers';
+
 const Recipes = () => {
 	const dispatch = useDispatch();
 
@@ -23,6 +25,7 @@ const Recipes = () => {
 					<ul className={classes.list}>
 					{ 
 						recipes.length ? recipes.map((recipe) => (
+
 							<Card 
 								key={uuidv4()}
 								id={recipe._id}
@@ -30,7 +33,7 @@ const Recipes = () => {
 								label={recipe.title}
 								tags={[
 									`${recipe.personCount} personen`,
-									`${recipe.cookingtime.value} ${recipe.cookingtime.unit}` 
+									`${recipe.cookingtime.value} ${translateUnit(recipe.cookingtime.unit)}` 
 								]}
 								introduction={recipe.introduction}
 								buttonLabel="Lees meer"

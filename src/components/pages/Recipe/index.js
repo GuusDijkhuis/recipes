@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Nav from '../../modules/Nav';
 import { getRecipe } from '../../../actions/recipes';
 
+import { translateUnit } from '../../../helpers';
+
 import classes from './index.module.css';
 
 const Recipe = () => {
@@ -35,7 +37,7 @@ const Recipe = () => {
 								<div>
 									<div className={classes.header}>
 										<h1>Informatie</h1>
-										<span>Bereidingstijd: {`${recipe.cookingtime.value} ${recipe.cookingtime.unit}`}</span>
+										<span>Bereidingstijd: {`${recipe.cookingtime.value} ${translateUnit(recipe.cookingtime.unit)}`}</span>
 										<span>Personen: {recipe.personCount}</span>
 									</div>
 								</div>
@@ -47,7 +49,7 @@ const Recipe = () => {
 												recipe.ingredients.map((ingredient, i) => (
 													<li key={i}>
 														<span>{`${ingredient.name}`}</span>
-														<span>{`${ingredient.quantity} ${ingredient.unit}`}</span>
+														<span>{`${ingredient.quantity} ${translateUnit(ingredient.unit)}`}</span>
 													</li>
 												)
 											)}
